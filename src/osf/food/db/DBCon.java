@@ -8,12 +8,12 @@ public class DBCon {
 	private static final String URL = "jdbc:oracle:thin:@localhost:1521:xe";
 	private static final String ID = "osfu";
 	private static final String PASSWORD = "12345678";
-	private static final String CLASS_NAME = "oracle.jdbc.OracleDriver";
+	private static final String CLASS_NAME = "oracle.jdbc.OracleDriver"; //유심칩이라고 생각하면 된다.
 	private static Connection con;
 
 	private static boolean open() {
 		try {
-			Class.forName(CLASS_NAME);
+			Class.forName(CLASS_NAME);//여기서는 우리가 오라클만쓰기때문에  굳이 선언해줄필요는 없지만  원래는 선언해줘야되는것이다.
 			con = DriverManager.getConnection(URL, ID, PASSWORD);
 			return true;
 		} catch (ClassNotFoundException e) { 
@@ -21,7 +21,6 @@ public class DBCon {
 			// ClassNotFoundException 과 SQLException 은 둘다 Exception 으로 볼수있기때문에
 			// catch (Exception e) 로 하나만써줘도된다.
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return false;

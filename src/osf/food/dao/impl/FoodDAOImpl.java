@@ -7,28 +7,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import osf.food.dao.FoodDAO;
-import osf.food.db.DBCon;
 import osf.food.vo.FoodVO;
+import test.DBCon;
 
 public class FoodDAOImpl implements FoodDAO {
 
-	@Override
 	public List<FoodVO> selectFoodList() {
-		String sql = "select food_num, food_name, food_price from food";
+		String sql = "select food_num, food_name, food_price";
 		try {
 			PreparedStatement ps = DBCon.getCon().prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			List<FoodVO> foodList = new ArrayList<>();
 			while(rs.next()) {
 				FoodVO food = new FoodVO();
-				food.setFoodNum(rs.getInt("food_num"));
 				food.setFoodName(rs.getString("food_name"));
+				food.setFoodNum(rs.getInt("food_num"));
 				food.setFoodPrice(rs.getInt("food_price"));
 				foodList.add(food);
-
-//				System.out.println(rs.getInt("food_num"));
-//				System.out.println(rs.getString("food_name"));
-//				System.out.println(rs.getInt("food_price"));
 			}
 			return foodList;
 		} catch (SQLException e) {
@@ -37,10 +32,10 @@ public class FoodDAOImpl implements FoodDAO {
 			DBCon.close();
 		}
 		return null;
+		
 	}
 	public static void main(String[] args) {
 		FoodDAO fdao = new FoodDAOImpl();
-//		fdao.selectFoodList();
 		List<FoodVO> foodList = fdao.selectFoodList();
 		System.out.println(foodList);
 	}
