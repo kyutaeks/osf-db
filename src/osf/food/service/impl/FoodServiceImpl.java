@@ -46,7 +46,7 @@ public class FoodServiceImpl implements FoodService {
 		}
 		return fdao.deleteFood(food);
 	}
-
+//아래부분에서는 단위테스트 각 단위마다 제대로 실행되는지 확인하기위한 테스트
 	public static void main(String[] args) throws Exception {
 		FoodService fs = new FoodServiceImpl();
 		List<FoodVO> foodList = fs.selectFoodList(null);
